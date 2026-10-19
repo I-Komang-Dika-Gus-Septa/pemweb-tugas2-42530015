@@ -1,0 +1,44 @@
+    <!DOCTYPE html>
+    <html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Katalog Menu Cafe Undiknas - Tempat nongkrong dan ngopi paling nyaman di kampus.">
+        <title>Cafe Undiknas</title>
+        <link rel="stylesheet" href="/css/style.css">
+        
+        <link rel="icon" type="image/png" href="/images/logo.png">
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="header-content">
+                <!-- Area Logo & Judul -->
+                <div class="logo-area">
+                    <a href="/" class="logo-link" aria-label="Halaman Utama Cafe Undiknas" style="display: flex; align-items: center; gap: 15px; text-decoration: none;">
+                        <img src="/images/logo.png" alt="Logo Cafe Undiknas" class="site-logo" width="60" height="60">
+                        <div style="display: flex; flex-direction: column; justify-content: center; text-align: left;">
+                            <h1 class="logo-title" style="margin: 0;">Cafe Undiknas</h1>
+                            <p class="tagline" style="margin: 0;">Tempat Nongkrong & Ngopi Paling Nyaman di Kampus</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Form Pencarian & Navigasi -->
+                <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+                    <form action="/" method="GET" class="search-form" role="search">
+                        <% if (typeof kategoriAktif !== 'undefined' && kategoriAktif !== 'Semua') { %>
+                            <input type="hidden" name="kategori" value="<%= kategoriAktif %>">
+                        <% } %>
+                        <input type="text" name="search" placeholder="Cari menu..." class="search-input" aria-label="Cari menu" value="<%= typeof searchQuery !== 'undefined' ? searchQuery : '' %>">
+                        <button type="submit" class="search-btn" aria-label="Tombol Cari">🔍</button>
+                    </form>
+
+                    <nav class="header-nav" aria-label="Navigasi Utama">
+                        <a href="/" class="nav-link">Katalog Menu</a>
+                        <a href="/?kategori=kopi" class="nav-link">Kopi</a>
+                        <a href="/?kategori=makanan" class="nav-link">Makanan</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <main style="padding: 20px; max-width: 1200px; margin: 40px auto 0 auto;">

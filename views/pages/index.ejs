@@ -1,0 +1,41 @@
+<%- include('../partials/header') %>
+
+<h2>Katalog Menu Cafe Undiknas</h2>
+
+<!-- Filter Kategori -->
+<div class="filter-menu" style="margin-bottom: 20px;">
+    <span class="filter-label">Kategori:</span>
+    <div class="filter-buttons" style="display: inline-flex; gap: 10px;">
+        <% 
+            let currentSearch = (typeof searchQuery !== 'undefined') ? searchQuery : '';
+            let activeKat = (typeof kategoriAktif !== 'undefined') ? kategoriAktif : 'Semua';
+        %>
+        <a href="/?search=<%= encodeURIComponent(currentSearch) %>" class="<%= activeKat === 'Semua' ? 'active' : '' %>" aria-label="Filter Semua Kategori">Semua</a>
+        <a href="/?kategori=kopi&search=<%= encodeURIComponent(currentSearch) %>" class="<%= activeKat === 'kopi' ? 'active' : '' %>" aria-label="Filter Kategori Kopi">Kopi</a>
+        <a href="/?kategori=non-kopi&search=<%= encodeURIComponent(currentSearch) %>" class="<%= activeKat === 'non-kopi' ? 'active' : '' %>" aria-label="Filter Kategori Non-Kopi">Non-Kopi</a>
+        <a href="/?kategori=makanan&search=<%= encodeURIComponent(currentSearch) %>" class="<%= activeKat === 'makanan' ? 'active' : '' %>" aria-label="Filter Kategori Makanan">Makanan</a>
+    </div>
+</div>
+
+<!-- Grid Tampilan Menu -->
+<div class="menu-grid">
+    <% if (menu && menu.length > 0) { %>
+        <% menu.forEach(item => { %>
+            <div class="menu-card">
+                <img src="/images/<%= item.foto %>" alt="<%= item.nama %>" class="menu-img" width="300" height="200" loading="lazy" decoding="async" onerror="this.src='/images/logo.png'">
+                <div class="menu-info">
+                    <span class="menu-kategori"><%= item.kategori %></span>
+                    <h3><%= item.nama %></h3>
+                    <p class="menu-harga">Rp <%= item.harga.toLocaleString('id-ID') %></p>
+                    <a href="/menu/<%= item.id %>" class="btn-detail" aria-label="Lihat Detail <%= item.nama %>">Lihat Detail</a>
+                </div>
+            </div>
+        <% }) %>
+    <% } else { %>
+        <p style="grid-column: 1/-1; text-align: center; color: #595959; padding: 40px;">
+            Menu yang kamu cari tidak ditemukan 😢
+        </p>
+    <% } %>
+</div>
+
+<%- include('../partials/footer') %>
